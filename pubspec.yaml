@@ -1,0 +1,25 @@
+name: javex_app
+description: A new Flutter project.
+
+# Version y otros metadatos del proyecto
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Aquí puedes agregar más dependencias si las necesitas
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  table_calendar: ^3.0.6
+
+flutter:
+  uses-material-design: true
+
+  # Aquí registramos la carpeta de assets
+  assets:
+    - assets/logo.png
