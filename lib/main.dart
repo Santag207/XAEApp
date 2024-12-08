@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
 void main() {
+  // Inicializar los servicios de Flutter y los plugins
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 

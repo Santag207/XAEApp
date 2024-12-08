@@ -20,6 +20,7 @@ class LoginScreen extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => MenuScreen()), // Pantalla principal
         );
+      // ignore: dead_code
       } else {
         // Muestra un mensaje si el correo no está verificado
         ScaffoldMessenger.of(context).showSnackBar(

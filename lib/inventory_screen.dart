@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'qr_scanner_screen.dart';
 
-class ItemListScreen extends StatefulWidget {
+class InventoryScreen extends StatefulWidget {
   @override
-  _ItemListScreenState createState() => _ItemListScreenState();
+  _InventoryScreenState createState() => _InventoryScreenState();
 }
 
-class _ItemListScreenState extends State<ItemListScreen> {
+class _InventoryScreenState extends State<InventoryScreen> {
   final List<Map<String, dynamic>> dummyScannedItems = [
     {'nombre': 'Pieza 1', 'cantidad': 10},
     {'nombre': 'Pieza 2', 'cantidad': 5},
@@ -43,9 +44,9 @@ class _ItemListScreenState extends State<ItemListScreen> {
         backgroundColor: Colors.black,
         elevation: 0,
         title: Padding(
-          padding: EdgeInsets.only(top: 30.0), // Ajusta el padding superior
+          padding: EdgeInsets.only(top: 35.0), // Ajusta el padding superior
           child: Text(
-            'Gestión de Ítems',
+            'Gestión de Piezas',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -57,42 +58,42 @@ class _ItemListScreenState extends State<ItemListScreen> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 20.0, left: 16.0, right: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0), // Padding global para ambos buscadores
         child: Column(
           children: [
             // Botones de Lista y Registrados
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildToggleButton('Lista', false),
-                _buildToggleButton('Registrados', true),
-              ],
+            Padding(
+              padding: EdgeInsets.only(top: 45.0), // Padding superior restaurado
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildToggleButton('Lista de Piezas', false),
+                  _buildToggleButton('Piezas Registradas', true),
+                ],
+              ),
             ),
             SizedBox(height: 20),
 
             // Mostrar el buscador exclusivo para "Lista"
             if (!isViewingRegistered)
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: TextField(
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    hintText: 'Buscar por nombre de pieza...',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    filled: true,
-                    fillColor: Colors.grey[800],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                    prefixIcon: Icon(Icons.search, color: Colors.white),
+              TextField(
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: 'Buscar por nombre de pieza...',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.grey[800],
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      searchQueryLista = value; // Actualizar búsqueda de "Lista"
-                    });
-                  },
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                  prefixIcon: Icon(Icons.search, color: Colors.white),
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    searchQueryLista = value; // Actualizar búsqueda de "Lista"
+                  });
+                },
               ),
 
             // Mostrar buscador y dropdown exclusivo para "Registrados"
@@ -104,12 +105,15 @@ class _ItemListScreenState extends State<ItemListScreen> {
                     child: TextField(
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        hintText: 'Buscar por nombre...',
+                        hintText: 'Buscar por nombre de pieza...',
                         hintStyle: TextStyle(color: Colors.grey),
                         filled: true,
                         fillColor: Colors.grey[800],
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.0)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                         contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                        prefixIcon: Icon(Icons.search, color: Colors.white), // Icono de lupa agregado
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -185,6 +189,13 @@ class _ItemListScreenState extends State<ItemListScreen> {
           ],
         ),
       ),
+
+      // Botón flotante para escanear QR
+      floatingActionButton: FloatingActionButton(
+        onPressed: _openQrScanner, // Llama a la función creada
+        backgroundColor: Colors.white,
+        child: Icon(Icons.qr_code, color: Colors.black),
+      ),
     );
   }
 
@@ -212,10 +223,9 @@ class _ItemListScreenState extends State<ItemListScreen> {
 
   // Mostrar detalles de un ítem disponible
   void _showAvailableItemDetails(BuildContext context, Map<String, dynamic> item) {
-    // Calcular piezas ocupadas basándose en el nombre
     final int piezasOcupadas = dummyRegisteredItems
         .where((e) => e['nombre'] == item['nombre']) // Buscar coincidencias por nombre
-        .fold<int>(0, (sum, e) => sum + (e['cantidad'] as int)); // Sumar cantidades ocupadas y convertir a int
+        .fold<int>(0, (sum, e) => sum + (e['cantidad'] as int)); // Sumar cantidades ocupadas
 
     showModalBottomSheet(
       context: context,
@@ -236,8 +246,6 @@ class _ItemListScreenState extends State<ItemListScreen> {
               ),
               SizedBox(height: 10),
               Text('Nombre: ${item['nombre']}', style: TextStyle(color: Colors.white)),
-              Text('Código: ${item['nombre'].toUpperCase()}_COD', // Código de ejemplo
-                  style: TextStyle(color: Colors.white)),
               Text('Cantidad disponible: ${item['cantidad']}', style: TextStyle(color: Colors.white)),
               Text('Piezas ocupadas: $piezasOcupadas', style: TextStyle(color: Colors.white)),
             ],
@@ -273,6 +281,15 @@ class _ItemListScreenState extends State<ItemListScreen> {
           ),
         );
       },
+    );
+  }
+
+  void _openQrScanner() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QRScannerScreen(), // Importa la pantalla QRScannerScreen
+      ),
     );
   }
 }

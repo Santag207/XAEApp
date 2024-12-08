@@ -1,4 +1,4 @@
-name: javex_app
+name: JaVexApp
 description: A new Flutter project.
 
 # Version y otros metadatos del proyecto
@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  url_launcher: ^6.1.7
+
   # Aquí puedes agregar más dependencias si las necesitas
 
 dev_dependencies:
@@ -23,3 +25,5 @@ flutter:
   # Aquí registramos la carpeta de assets
   assets:
     - assets/logo.png
+    - assets/profile_picture.jpg
+

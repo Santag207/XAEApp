@@ -34,51 +34,106 @@ class _HomeScreenState extends State<HomeScreen> {
     ],
   };
 
+  // Lista de miembros activos
+  final List<String> miembrosActivos = [
+    'Juan Pérez',
+    'María López',
+    'Carlos García',
+    'Ana Torres',
+    'Santiago Castro',
+    'Diana Rodríguez',
+  ];
+
   @override
   Widget build(BuildContext context) {
     // Calcular el número total de tareas pendientes
     final totalTareasPendientes = tareasPorSubsistema.values.expand((tareas) => tareas).length;
 
-    return Container(
-      color: Colors.black, // Fondo negro
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center, // Centramos el contenido verticalmente
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Logo centrado en grande
-          Center(
-            child: Image.asset(
-              'assets/logo.png', // Cambia esta ruta si es necesario
-              height: 120,
-            ),
-          ),
-          SizedBox(height: 20),
-          // Título principal
-          Center(
-            child: Text(
-              'Bienvenido al mejor semillero',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.red,
+    return Scaffold(
+      backgroundColor: Colors.black, // Fondo negro
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Título principal con padding superior
+              Padding(
+                padding: EdgeInsets.only(top: 70.0),
+                child: Center(
+                  child: Text(
+                    'Bienvenido de vuelta al semillero',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(height: 10),
-          // Número de tareas pendientes
-          Center(
-            child: Text(
-              'Tareas pendientes: $totalTareasPendientes',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
+              // Logo centrado en grande
+              Center(
+                child: Image.asset(
+                  'assets/logo.png', // Cambia esta ruta si es necesario
+                  height: 200,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
+              SizedBox(height: 20),
+              // Número de tareas pendientes
+              Center(
+                child: Text(
+                  'Tareas pendientes: $totalTareasPendientes',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold, // Negrita
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: 20),
+              // Subtítulo y lista de miembros activos
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Miembros en el Laboratorio:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              // Fondo blanco con bordes redondeados para la lista de miembros activos
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                padding: EdgeInsets.all(12.0),
+                child: ListView.builder(
+                  shrinkWrap: true, // Permitir que la lista se ajuste a su contenido
+                  physics: NeverScrollableScrollPhysics(), // Deshabilitar el scroll dentro del contenedor
+                  itemCount: miembrosActivos.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        radius: 8,
+                        backgroundColor: Colors.green, // Círculo verde
+                      ),
+                      title: Text(
+                        miembrosActivos[index],
+                        style: TextStyle(color: Colors.black), // Cambiar texto a negro
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

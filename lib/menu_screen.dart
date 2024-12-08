@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
-import 'qr_scanner_screen.dart';
 import 'profile_screen.dart';
-import 'item_list_screen.dart';
+import 'inventory_screen.dart';
 import 'pending_screen.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -17,8 +16,7 @@ class _MenuScreenState extends State<MenuScreen> {
   final List<Widget> _screens = [
     HomeScreen(),         // Pantalla de inicio
     PendingScreen(),      // Pantalla de pendientes
-    QRScannerScreen(),    // Pantalla de escaneo QR
-    ItemListScreen(),    // Pantalla de piezas
+    InventoryScreen(),    // Pantalla de inventario
     ProfileScreen(),      // Pantalla de perfil
   ];
 
@@ -26,57 +24,22 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: _currentIndex,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.grey,
-            backgroundColor: Colors.black,
-            onTap: (index) {
-              if (index != 2) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              }
-            },
-            items: [
-              _buildAnimatedItem(Icons.home, 'Inicio', 0),
-              _buildAnimatedItem(Icons.list_alt, 'Pendientes', 1),
-              BottomNavigationBarItem(
-                icon: SizedBox.shrink(), // Espacio vacío para el botón QR
-                label: '',
-              ),
-              _buildAnimatedItem(Icons.widgets_outlined, 'Piezas', 3),
-              _buildAnimatedItem(Icons.person, 'Perfil', 4),
-            ],
-          ),
-          Positioned(
-            bottom: 5, // Ajustar la posición del botón QR
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _currentIndex = 2; // El botón central navega a Escanear QR
-                });
-              },
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12), // Esquinas redondeadas
-                  border: Border.all(color: Colors.black, width: 3),
-                ),
-                child: Icon(
-                  Icons.qr_code, // Ícono QR
-                  size: 28, // Tamaño del ícono
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.black,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          _buildAnimatedItem(Icons.home, 'Inicio', 0),
+          _buildAnimatedItem(Icons.list_alt, 'Pendientes', 1),
+          _buildAnimatedItem(Icons.widgets_outlined, 'Inventario', 2),
+          _buildAnimatedItem(Icons.person, 'Perfil', 3),
         ],
       ),
     );
