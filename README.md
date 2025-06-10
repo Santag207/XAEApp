@@ -1,26 +1,31 @@
-# JaVexApp
+# XAE Manager App
 
-**JaVexApp** is a comprehensive application developed as part of the Javex initiative. This project aims to efficiently manage members, meetings, tasks, agendas, and inventory monitoring. Additionally, it provides detailed user profiles by connecting to a database and utilizing QR code scanning technology.
+**XAE Manager App** es una aplicación integral desarrollada para el **Semillero Xaverian Aerospace Engineering (XAE)**. Este proyecto tiene como objetivo facilitar la **gestión de miembros, reuniones, tareas, agendas e inventario**, así como centralizar el acceso a perfiles detallados mediante tecnología de escaneo de códigos QR.
 
-## Author
-Santiago Castro Zuluaga
+## 👨‍🚀 Proyecto del Semillero XAE
 
-## Features
+Esta herramienta nace como parte del esfuerzo del semillero por integrar tecnología en los procesos internos de organización, optimizar la trazabilidad de las actividades y fortalecer el trabajo colaborativo dentro de proyectos multidisciplinarios.
 
-- **Member Management:** Add, update, and remove member information, ensuring an up-to-date directory.
-- **Meeting Scheduling:** Organize and schedule meetings, send notifications, and maintain records of minutes.
-- **Task Management:** Assign tasks, set deadlines, and track progress to ensure timely completion.
-- **Agenda Planning:** Create and share meeting agendas to keep discussions focused and productive.
-- **Inventory Monitoring:** Track inventory levels, receive alerts for low stock, and manage resources effectively.
-- **User Profiles:** Access detailed profiles for each member, including contact information and activity history.
-- **QR Code Integration:** Utilize QR code scanning for quick member check-ins, inventory tracking, and accessing user profiles.
+## ✍️ Autor
+Santiago Castro Zuluaga  
+Semillero XAE – Pontificia Universidad Javeriana
 
-## Technologies Used
+## ✨ Funcionalidades
 
-- **Programming Language:** Dart
-- **Framework:** Flutter
-- **Database:** Firebase or Postgres
-- **QR Code Scanner:**  Qr_code_scanner and barcode_scan2
+- **Gestión de miembros:** Registro, edición y eliminación de miembros. Acceso a directorios actualizados con datos y roles dentro del semillero.
+- **Agendamiento de reuniones:** Planificación de encuentros, envío de notificaciones y almacenamiento de actas.
+- **Gestión de tareas:** Asignación de responsabilidades, seguimiento de progreso y cumplimiento de plazos.
+- **Planificación de agendas:** Creación de agendas para reuniones, con opción de compartirlas con los asistentes.
+- **Control de inventario:** Registro de materiales, alertas por bajo stock y trazabilidad de insumos y herramientas.
+- **Perfiles de usuario:** Visualización de datos completos de cada miembro: contacto, historial de participación y tareas asignadas.
+- **Escaneo de Códigos QR:** Para ingreso rápido a reuniones, consulta de perfiles e inventario con identificación única.
+
+## 🧰 Tecnologías utilizadas
+
+- **Lenguaje de programación:** Dart  
+- **Framework:** Flutter  
+- **Base de datos:** Firebase o PostgreSQL  
+- **Escáner QR:** `qr_code_scanner`, `barcode_scan2`
 
 ## Project Structure
 ```
@@ -40,94 +45,43 @@ JaVexApp/
 ├── pubspec.yaml         # Flutter project configuration file
 └── README.md            # Main documentation of the project
 ```
-### Usage
-1. **Member Management:**
 
-- Navigate to the "Members" section to view the member directory.
+## 🚀 ¿Cómo usarla?
 
-- Use the "Add Member" button to input new member details.
+### 1. Gestión de miembros
+- Ir a la sección "Miembros".
+- Añadir nuevos integrantes o modificar información de miembros actuales.
+- Consultar historial y estado de cada participante.
 
-- Select a member to update their information or remove them from the directory.
+### 2. Reuniones
+- Acceder al módulo de "Reuniones".
+- Programar encuentros con hora, fecha y agenda.
+- Enviar notificaciones automáticas a los miembros.
 
-2. **Meeting Scheduling:**
+### 3. Tareas
+- Ver tareas asignadas por proyecto.
+- Crear nuevas tareas y definir responsables y fechas límite.
+- Marcar tareas completadas o actualizar su estado.
 
-- Access the "Meetings" section to view upcoming and past meetings.
+### 4. Agendas
+- Crear agendas detalladas para cada reunión.
+- Compartirlas para asegurar que todos lleguen preparados.
 
-- Schedule a new meeting by specifying the date, time, and agenda.
+### 5. Inventario
+- Consultar existencias de herramientas y componentes.
+- Añadir nuevos ítems y configurar alertas por bajo inventario.
 
-- Send notifications to members about scheduled meetings.
+### 6. Perfiles de usuario
+- Consultar información completa de cada miembro.
+- Revisar historial de tareas, asistencia y roles asumidos.
 
-3. **Task Management:**
+### 7. QR Codes
+- Escanear para marcar asistencia, ver perfiles o registrar movimiento de materiales.
 
-- Go to the "Tasks" section to view assigned tasks.
+## ⚙️ Instalación
 
-- Assign new tasks to members, set deadlines, and monitor progress.
+### Clonar el repositorio:
 
-- Update task statuses as they are completed.
-
-4. **Agenda Planning:**
-
-- In the "Agenda" section, create detailed agendas for upcoming meetings.
-
-- Share agendas with members to ensure preparedness.
-
-5. **Inventory Monitoring:**
-
-- Visit the "Inventory" section to view current stock levels.
-
-- Add new inventory items, update quantities, and set low-stock alerts.
-
-6. **User Profiles:**
-
-- Access detailed profiles by selecting a member from the directory.
-
-- View contact information, activity history, and assigned tasks.
-
-7. **QR Code Integration:**
-
-Use the built-in QR code scanner to:
-
-- Quickly check in members to meetings.
-
-- Access member profiles by scanning their QR codes.
-
-- Track inventory items by scanning product QR codes.
-
-## Installation
-
-To clone and run this application, follow these steps:
-
-1. **Clone the repository:**
-
-   ```
-   git clone https://github.com/Santag207/JaVexApp.git
-   ```
-
-2. **Navigate to the project directory:**
-
-  ```
-  cd JaVexApp
-  ```
-
-3. **Install dependencies:**
-  
-  ```
-  flutter pub get
-  ```
-
-4. **Configure the database:**
-
-Configure with the DB of your preference
-
-5. **Run the application:**
-
-A) On an Android device or emulator:
-  ```
-  flutter run
-  ```
-
-B) On an iOS device or simulator:
-
-  ```
-  flutter run -d ios
+```bash
+git clone https://github.com/Santag207/JaVexApp.git
   ```
